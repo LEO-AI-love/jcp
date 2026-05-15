@@ -26,6 +26,7 @@
 - **热点舆情** - 聚合百度、抖音、B站、头条等平台热点趋势
 - **研报服务** - 专业研究报告查询和智能分析
 - **MCP 扩展** - 支持 Model Context Protocol，可扩展更多工具能力
+- **JCP MCP Server** - 可把行情、F10、研报等数据直接暴露给 Codex，替代 OpenClaw 分析入口
 - **布局持久化** - 自动保存窗口和面板布局，下次启动自动恢复
 
 ## 技术栈
@@ -66,6 +67,7 @@
 | ✨ **提示词增强** | AI 驱动的提示词优化 |
 | 🔌 **连接测试** | AI 配置连通性验证 |
 | 🐙 **OpenClaw** | AI 驱动的深度股票分析服务 |
+| 🔗 **JCP MCP Server** | 通过 MCP 把 JCP 数据工具提供给 Codex |
 | 📉 **市场状态** | 智能交易时间调度、开盘/收盘/休市自动识别 |
 
 ## 快速开始
@@ -136,6 +138,8 @@ wails build -platform linux/amd64
 
 ```
 ccjc/
+├── cmd/
+│   └── jcp-mcp/            # 本地 MCP Server 入口
 ├── main.go                 # 应用入口
 ├── app.go                  # 后端核心逻辑
 ├── wails.json              # Wails 配置
@@ -206,6 +210,14 @@ Agent 配置通过策略管理系统进行，支持：
 - 新闻资讯搜索
 - 研报查询
 - 热点舆情获取
+
+也可以直接运行 JCP MCP Server，让 Codex 通过本地工具读取 JCP 数据并自行生成分析结论：
+
+```bash
+go build -o ./bin/jcp-mcp ./cmd/jcp-mcp
+```
+
+更多说明见 [JCP_MCP.md](JCP_MCP.md)。
 
 ## 开发指南
 
